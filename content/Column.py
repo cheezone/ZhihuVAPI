@@ -23,15 +23,18 @@ class Column(Container):
         zhihu.info(f'Column 对象 {id} ({self})初始化')
         responseJSON = zhihu.json(
             f'https://api.zhihu.com/columns/{id}?include=%24.intro')
+        print(responseJSON)
         self.load(responseJSON)
 
     def load(self, JSON):
         super().load(JSON)
 
         from .Topic import Topic
+        from .People import People
         dataObj = {
             'topics': list(map(lambda x: Topic(x), JSON.get('topics'))) if JSON.get('topics') else None,
-            'followers_count': JSON.get('followers')
+            'followers_count': JSON.get('followers'),
+            'author': People(JSON.get('author')),
         }
         for k, v in dataObj.items():
             if v != None:

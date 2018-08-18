@@ -34,7 +34,7 @@ class Article(Content):
         if JSON.get('contributions') and len(JSON.get('contributions')) > 0:
             # TODO
             from .Column import Column
-            self.column = Column(JSON.get('contributions')[0])
+            self.column = Column(JSON.get('contributions')[0]['column'])
         for v in ['status', 'title', 'is_normal', 'reason', 'can_tip', 'excerpt_title', 'contributions', 'annotation_detail', 'voting', 'image_width', 'annotation_action', 'has_publishing_draft', 'linkbox', 'image_url', 'tipjarors_count']:
             if JSON.get(v) != None:
                 setattr(self, v, JSON.get(v))

@@ -10,7 +10,7 @@ class Collection(Container):
     def __init__(self, id):
         super().__init__(id, '收藏夹', 'Collection')
         if 2 == 1:
-            self.creator = ""
+            self.author = ""
             self.answer_count = ""
             self.comment_count = ""
             self.followers_count = ""
@@ -25,17 +25,16 @@ class Collection(Container):
     def load(self, JSON):
         super().load(JSON)
         from .People import People
-
         from .Topic import Topic
         dataObj = {
-            'creator': People(JSON.get('creator')) if JSON.get('creator') else None,
+            'author': People(JSON.get('creator')) if JSON.get('creator') else None,
             'topics': list(map(lambda x: Topic(x), JSON.get('topics'))) if JSON.get('topics') else None,
             'followers_count': JSON.get('follower_count')
         }
         for k, v in dataObj.items():
             if v != None:
                 setattr(self, k, v)
-        for v in ['creator', 'answer_count', 'comment_count', 'is_public']:
+        for v in ['answer_count', 'comment_count', 'is_public']:
             if JSON.get(v) != None:
                 setattr(self, v, JSON.get(v))
 
