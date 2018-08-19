@@ -156,6 +156,12 @@ class People(Container):
     #     from .Publication import Publication
     #     return Publication(x)
 
+    @zhihu.iter_factory('following_questions')
+    def following_questions(x):
+        """返回{name}关注的问题 """
+        from .Question import Question
+        return Question(x)
+
     @zhihu.iter_factory('following_columns')
     def following_columns(x):
         """返回{name}关注的专栏 """
