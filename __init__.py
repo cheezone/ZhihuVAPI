@@ -10,7 +10,7 @@ from .content import Column
 from .content import Collection
 from .util import *
 
-__version__ = "1.0.1"
+__version__ = "1.0.3"
 __all__ = []
 
 People = People.People

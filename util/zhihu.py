@@ -202,7 +202,7 @@ def iter_factory(url_function_name, method=json):
                     offset = int(start / 10) * 10
                 data = {}
                 data.update({'type_name': self.type_name})
-                if self.__class__.__name__ == 'People|':
+                if self.__class__.__name__ == 'People':
                     data.update({'name': self.name})
                 elif re.match(r"Question|Column|Collection|Topic", self.__class__.__name__):
                     data.update({'name': self.title})
