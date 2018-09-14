@@ -84,10 +84,10 @@ def urls(content_obj, type_name: str):
             'vote': lambda vote='up': [f'https://www.zhihu.com/api/v4/answers/{id}/voters', {"vote": {"type": 'up'}, 'unvote': {"type": 'neutral'},
                                                                                              'down': {"type": 'down'},
                                                                                              'undown': {"type": 'neutral'}}[vote]],
-            'nohelp': lambda: f'https://api.zhihu.com/answers/{id}/nothelpers?',
-            'thank': lambda: f'https://www.zhihu.com/api/v4/answers/{id}/thankers?',
+            'nohelp': lambda: f'https://api.zhihu.com/answers/{id}/nothelpers',
+            'thank': lambda: f'https://www.zhihu.com/api/v4/answers/{id}/thankers',
             'comment': lambda content='': [f'https://api.zhihu.com/comments', {'content': content, 'resource_id': id, 'type': content_obj.eng_type_name}],
-            'collect': lambda: f'https://api.zhihu.com/answers/{id}/collections_v2?',
+            'collect': lambda: f'https://api.zhihu.com/answers/{id}/collections_v2',
             'collections': lambda offset=0: f'https://api.zhihu.com/answers/{id}/collections_v2?offset={offset}',
             'block': lambda: [f'https://api.zhihu.com/topstory/uninterestv2', {'item_brief': json.dumps({"source": "TS", "type": "answer", "id": id})}],
             # 手机端没有,用的是电脑端的

@@ -68,6 +68,8 @@ def get(url, *arg):
     """
     对 Requests GET 请求的包装,加上了知乎需要的 Headers。
     """
+    if url.__class__.__name__ == 'function':
+        url = url()
     try:
         r = requests.get(url, headers=Session.headers,
                          verify=verify, timeout=3, *arg)
@@ -98,6 +100,8 @@ def post(url, data, *arg):
     对 Requests POST 请求的包装,加上了知乎需要的 Headers。
     """
     try:
+        if url.__class__.__name__ == 'function':
+            url = url()
         r = requests.post(url, headers=Session.headers,
                           verify=verify, timeout=3, data=data, *arg)
         r.encoding = 'utf-8'  # 强制按 UTF-8 来解析
@@ -118,6 +122,8 @@ def json(url, *arg):
     """
     自动将 GET 请求转换为 JSON
     """
+    if url.__class__.__name__ == 'function':
+        url = url()
     try:
         text = get(url, *arg).text
         responseJSON = json_moudle.loads(text)
@@ -133,6 +139,8 @@ def jsonp(url, data={}, *arg):
     """
     自动将 POST 请求转换为 JSON
     """
+    if url.__class__.__name__ == 'function':
+        url = url()
     try:
         text = post(url, data, *arg).text
         responseJSON = json_moudle.loads(text)
@@ -147,6 +155,8 @@ def jsonput(url, data={}, *arg):
     """
     自动将 PUT 请求转换为 JSON
     """
+    if url.__class__.__name__ == 'function':
+        url = url()
     try:
         return json_moudle.loads(requests.put(url, *arg, data=data, headers=Session.headers,
                                               verify=verify, timeout=3).text)
@@ -158,6 +168,8 @@ def jsond(url, *arg):
     """
     自动将 DELETE 请求转换为 JSON
     """
+    if url.__class__.__name__ == 'function':
+        url = url()
     try:
         return json_moudle.loads(requests.delete(url, headers=Session.headers,
                                                  verify=verify, timeout=3, *arg).text)

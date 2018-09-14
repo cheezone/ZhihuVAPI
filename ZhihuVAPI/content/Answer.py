@@ -80,11 +80,11 @@ class Answer(Content):
     @zhihu.log_attr
     def thank(self):
         '''感谢{name}的答案'''
-        url = urls(self, 'thank')('thank')
-        responseJSON = zhihu.jsonp(url[0], url[1])
+        url = urls(self, 'thank')()
+        responseJSON = zhihu.jsonp(url)
 
     @zhihu.log_attr
     def unthank(self):
         '''取消对{name}的答案的感谢'''
-        url = urls(self, 'thank')('unthank')
-        responseJSON = zhihu.jsonp(url[0], url[1])
+        url = urls(self, 'thank')()
+        responseJSON = zhihu.jsond(url)

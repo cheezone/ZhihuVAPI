@@ -89,14 +89,14 @@ class Container(Ancestry):
     @zhihu.log_attr
     def follow(self):
         '''关注了{type_name} {name}'''
-        url = urls(self, 'follow')
+        url = urls.urls(self, 'follow')
         zhihu.jsonp(url)
         return self
 
     @zhihu.log_attr
     def unfollow(self):
         '''关注了{type_name} {name}'''
-        url = urls(self, 'follow')
+        url = urls.urls(self, 'follow')
         zhihu.jsond(url[0])
         return self
 
@@ -162,14 +162,14 @@ class Content(Ancestry):
     def commment(self, content):
         doc_output_content = content[1:6]if len(content) > 6 else content
         '''评论了{name}的{type_name}:doc_output_content'''
-        url = urls(self, 'commment')(content)
+        url = urls.urls(self, 'commment')(content)
         responseJSON = zhihu.jsonp(url[0], url[1])
         return self
 
     @zhihu.log_attr
     def vote(self):
         '''赞同了{name}的{type_name}'''
-        url = urls(self, 'vote')('vote')
+        url = urls.urls(self, 'vote')('vote')
         responseJSON = zhihu.jsonp(url[0], url[1])
 
         return self
@@ -177,7 +177,7 @@ class Content(Ancestry):
     @zhihu.log_attr
     def unvote(self):
         '''取消对{name}的{type_name}的赞同'''
-        url = urls(self, 'vote')('unvote')
+        url = urls.urls(self, 'vote')('unvote')
         responseJSON = zhihu.jsonp(url[0], url[1])
 
         return self
@@ -185,13 +185,13 @@ class Content(Ancestry):
     @zhihu.log_attr
     def collect(self, add=[], remove=[]):
         '''收藏了{name}的{type_name}'''
-        url = urls(self, 'collect')(add, remove)
+        url = urls.urls(self, 'collect')(add, remove)
         responseJSON = zhihu.jsonp(url[0], url[1])
         return self
 
     @zhihu.log_attr
     def uncollect(self, remove=[], add=[]):
         '''取消收藏了{name}的{type_name}'''
-        url = urls(self, 'collect')(add, remove)
+        url = urls.urls(self, 'collect')(add, remove)
         responseJSON = zhihu.jsonp(url[0], url[1])
         return self
