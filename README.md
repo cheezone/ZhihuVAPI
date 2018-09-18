@@ -25,6 +25,31 @@ ZhihuVAPI 是一个可以让你以一种优雅的形式调用知乎数据的 Pyt
 1. 什么都不管,脚本会默认读取 Chrome 或者 Cent 的 cookies.如果你是其他类 Chrome 的浏览器,你可以在`config.py`的`cookiepath`自定义cookies文件的路径.
 2. 在`config.py`禁用`is_use_chrome_cookies`后,你可以在里面自定义`headers`.
 
+
+**Mac 用户需要设置自定义的 cookie 和 hash**
+
+登录之后 Zhihu 后，访问 [这个接口](https://api.zhihu.com/people/self)，拿到 json 对象第一层的 id 值。
+配置 `ZhihuVAPI/config.py` 文件，`is_use_chrome_cookies = False` ，并且添加你的 hash 属性到文件中，同时使用自定义的 headers，注意将自己知乎页面的 cookie 值填入（仅补全 `Cookie': '_xsrf=...;   z_c0=...'` 省略号代表的值即可）。
+
+```
+// 示例
+// 接口的返回值
+{
+    id: "a8bXXXXXXXXXXXXXXXX475", // 这个就是 hash
+    favorite_count: xxx,
+    voteup_count: xxx,
+    live_count: xxx,
+    ...// 其他属性
+}
+
+// config.py
+hash = 'a8bXXXXXXXXXXXXXXXX475'
+is_use_chrome_cookies = False
+```
+
+使用 `pip install -U --no-dependencies ZhihuVAPI` 来下载依赖可以略过 pywin32 的依赖下载。
+
+
 ### 读取自己
 
 ```Python
