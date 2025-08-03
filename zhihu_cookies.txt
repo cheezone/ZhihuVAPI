@@ -1,0 +1,4 @@
+#LWP-Cookies-2.0
+Set-Cookie3: _zap="07e02a09-b73b-4922-a640-44d4350dba6f"; path="/"; domain=".zhihu.com"; path_spec; domain_dot; expires="2027-08-03 18:02:15Z"; version=0
+Set-Cookie3: sec_token=a7e53dc978083f238b9439400fb4ba07; path="/"; domain=".zhihu.com"; path_spec; domain_dot; secure; expires="2025-08-03 18:12:30Z"; HttpOnly=None; version=0
+Set-Cookie3: BEC=f7bc18b707cd87fca0d61511d015686f; path="/"; domain="www.zhihu.com"; path_spec; expires="2025-08-03 19:02:15Z"; version=0
