@@ -8,6 +8,8 @@ info_switch = True
 is_use_chrome_cookies = True
 # 自定义使用的 Cookie 文件路径
 cookiepath = ''
+# 用户hash值，用于API调用
+hash = ''
 # 当 is_use_chrome_cookies = False 时使用的请求头部
 headers = {
     'Cookie': '_xsrf=...;   z_c0=...',

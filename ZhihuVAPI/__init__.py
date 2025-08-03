@@ -23,11 +23,28 @@ Column = Column.Column
 Collection = Collection.Collection
 
 # 初始化自己
-JSON = zhihu.json('https://api.zhihu.com/people/self')
-config.hash = JSON['id']
-self = People(JSON)
-self.created_at = JSON['created_at']
-self.email = JSON['email']
+try:
+    JSON = zhihu.json('https://api.zhihu.com/people/self')
+    config.hash = JSON['id']
+    self = People(JSON)
+    self.created_at = JSON['created_at']
+    self.email = JSON['email']
+except:
+    # 如果无法获取用户信息，创建默认的self对象
+    class DefaultSelf:
+        def __init__(self):
+            self.name = "未登录用户"
+            self.voteup_count = 0
+            self.favorited_count = 0
+            self.followers_count = 0
+            self.question_count = 0
+            self.answer_count = 0
+            self.articles_count = 0
+            self.columns_count = 0
+            self.created_at = None
+            self.email = None
+    
+    self = DefaultSelf()
 
 # if __name__ == '__main__':
 #     print('作为主程序运行')
