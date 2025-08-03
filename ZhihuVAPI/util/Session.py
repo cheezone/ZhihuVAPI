@@ -29,22 +29,18 @@ if config.is_use_chrome_cookies == True and os.name == 'nt':
         print('默认加载 Chrome 的 Cookies(这可以在 config.py 里面修改):' + '; '.join(texts))
     headers = {
         'Cookie': '; '.join(texts),
-        'Accept-Encoding': 'gzip',
-        # 'User-Agent': 'com.zhihu.android/Futureve/5.21.2 Mozilla/5.0 (Linux; Android 5.1.1; SM-G925F Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36',
-        'User-Agent': 'ZhihuHybrid com.zhihu.android/Futureve/5.21.2 Mozilla/5.0 (Linux; Android 5.1.1; SM-G925F Build/LMY48Z) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Safari/537.36',
-        # 是个坑点
-        # 'Authorization': 'Bearer 2.1nT3nAgAAAAAAQCTkYHbtDQwAAABgAlVN5OR7WwDipjTIOQZzMdBwDlgXIdlLs0_Wsw',
-        'x-api-version': '3.0.76',
-        'x-app-version': '5.21.2',
-        'x-app-flavor': 'yybgg',
-        'x-app-build': 'release',
-        'x-network-type': 'WiFi',
-        # 'X-SUGER':  'SU1FST04NjQ1Mzc3NDIxMzI3MTE7QU5EUk9JRF9JRD05MDE3MDQ0MTc0Mjc1ODE0',
-        # 'X-ZST-82': '1.0AHDn446V-w0MAAAASwUAADEuMGbAX1sAAAAAOq9apOGfzFKL1bLw2B6sBVAhm4M=',
-        # 'x-udid': 'AEAk5GB27Q1LBUlfpLUtrEBLk8F7KE62dbU=',
-        'x-requested-with': 'Fetch',
-        'x-app-za': 'OS=Android&Release=5.1.1&Model=SM-G925F&VersionName=5.21.2&VersionCode=764&Product=com.zhihu.android&Width=1080&Height=1920&Installer=%E5%BA%94%E7%94%A8%E5%AE%9D-%E5%B9%BF%E5%91%8A&DeviceType=AndroidPhone&Brand=samsung&OperatorType=46000', 'accept': 'application/json, text/plain, */*'
-
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'authorization': 'oauth c3cef7c66a1843f8b3a9e6a1e3160e20',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Host': 'www.zhihu.com',
+        'Referer': 'https://www.zhihu.com/',
+        'Origin': 'https://www.zhihu.com/',
+        'Content-Type': 'application/json, text/plain, */*',
+        'Pragma': 'no-cache',
     }
 else:
 
