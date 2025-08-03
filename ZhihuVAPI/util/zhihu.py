@@ -70,22 +70,53 @@ def get(url, *arg):
     """
     if url.__class__.__name__ == 'function':
         url = url()
-    try:
-        r = requests.get(url, headers=Session.headers,
-                         verify=verify, timeout=3, *arg)
-        r.encoding = 'utf-8'  # 强制按 UTF-8 来解析
-        return r
-    except requests.exceptions.ProxyError:
-        log(f'访问{url}时出错,检查你的代理')
-    except:
+    
+    # 添加重试机制
+    max_retries = 3
+    for attempt in range(max_retries):
         try:
             r = requests.get(url, headers=Session.headers,
-                             verify=verify, timeout=3, *arg)
-            r.encoding = 'gbk'  # 强制按 GBK 来解析
-            return r
+                             verify=verify, timeout=10, *arg)
+            r.encoding = 'utf-8'  # 强制按 UTF-8 来解析
+            
+            # 检查响应状态
+            if r.status_code == 200:
+                return r
+            elif r.status_code == 403:
+                log(f'访问被拒绝，可能需要更新认证信息: {url}')
+                break
+            elif r.status_code == 429:
+                log(f'请求过于频繁，等待后重试: {url}')
+                import time
+                time.sleep(2 ** attempt)  # 指数退避
+                continue
+            else:
+                log(f'HTTP {r.status_code}: {url}')
+                break
+                
+        except requests.exceptions.ProxyError:
+            log(f'访问{url}时出错,检查你的代理')
+            break
+        except requests.exceptions.Timeout:
+            log(f'请求超时，重试中... ({attempt + 1}/{max_retries})')
+            if attempt == max_retries - 1:
+                raise
+            continue
         except Exception as e:
-            raise e
-            log(f'实在没办法了,按 GBK 来解析也没有用,我也不知道发生什么事:{url}')
+            log(f'请求失败: {e}')
+            if attempt == max_retries - 1:
+                raise e
+            continue
+    
+    # 如果所有重试都失败了，尝试用GBK编码
+    try:
+        r = requests.get(url, headers=Session.headers,
+                         verify=verify, timeout=10, *arg)
+        r.encoding = 'gbk'  # 强制按 GBK 来解析
+        return r
+    except Exception as e:
+        log(f'实在没办法了,按 GBK 来解析也没有用,我也不知道发生什么事:{url}')
+        raise e
 
 
 def error(JSON, url='', h=''):
